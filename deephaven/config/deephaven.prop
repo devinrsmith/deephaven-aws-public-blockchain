@@ -1,0 +1,3 @@
+includefiles=dh-defaults.prop
+
+AuthHandlers=io.deephaven.auth.AnonymousAuthenticationHandler

@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  deephaven:
+    build:
+      context: deephaven
+    environment:
+      START_OPTS: -Xmx8g
+      # S3_READ_AHEAD_COUNT: 8
+      # S3_FRAGMENT_SIZE: 65536
+    ports:
+      - "10000:10000"
