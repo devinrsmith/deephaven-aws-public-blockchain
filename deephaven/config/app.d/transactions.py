@@ -54,12 +54,19 @@ def transactions_component():
     # todo: dropdown based on transactions.keys()?
     # https://github.com/deephaven/deephaven-plugins/issues/200
     value, set_value = use_state(next(iter(reversed(_uris.keys()))))
-    # todo: handle out-of-bounds
-    s3_uri = _uris[value]
-    s3_table = read_transactions(s3_uri)
+
+    if value not in _uris:
+        ret = ui.illustrated_message(
+            ui.icon("vsWarning", style={"fontSize": "48px"}),
+            ui.heading("Invalid Date"),
+            ui.content("Please enter a valid Date"),
+        )
+    else:
+        s3_uri = _uris[value]
+        ret = read_transactions(s3_uri)
     return ui.flex(
         ui.text_field(value=value, on_change=set_value),
-        s3_table,
+        ret,
         direction="column",
         flex_grow=1,
     )
