@@ -6,7 +6,12 @@ services:
       context: deephaven
     environment:
       START_OPTS: -Xmx8g
-      # S3_READ_AHEAD_COUNT: 8
-      # S3_FRAGMENT_SIZE: 65536
+      # These values are somewhat tuned for remote access for UI responsiveness.
+      # The underlying data is in AWS S3 us-east-2, so the closer the DH server
+      # is to the data, the faster it will be. Best case scenario, you can run
+      # this from AWS us-east-2 datacenter. It's usable from the US west coast,
+      # but you'll notice that loading is not as fast.
+      S3_READ_AHEAD_COUNT: 8
+      S3_FRAGMENT_SIZE: 65536
     ports:
       - "10000:10000"

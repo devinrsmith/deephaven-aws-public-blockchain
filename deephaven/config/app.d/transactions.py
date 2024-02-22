@@ -11,13 +11,18 @@ import os
 from datetime import timedelta
 from functools import cache
 
+
+def _int_if(x):
+    return int(x) if x else None
+
+
 # static now, maybe make dynamic w/ listener in future if necessary?
 _uris = {date: s3Uri for date, s3Uri in to_numpy(csv.read("/uris.csv"))}
 _s3_instructions = s3.S3Instructions(
     "us-east-2",
     anonymous_access=True,
-    read_ahead_count=os.getenv("S3_READ_AHEAD_COUNT", 8),
-    fragment_size=os.getenv("S3_FRAGMENT_SIZE", 65536),
+    read_ahead_count=_int_if(os.getenv("S3_READ_AHEAD_COUNT")),
+    fragment_size=_int_if(os.getenv("S3_FRAGMENT_SIZE")),
     read_timeout=timedelta(seconds=10),
 )
 
