@@ -1,3 +1,11 @@
 includefiles=dh-defaults.prop
 
 AuthHandlers=io.deephaven.auth.AnonymousAuthenticationHandler
+
+http.port=8443
+http.http1=false
+https.sniHostCheck=false
+
+ssl.identity.type=privatekey
+ssl.identity.certChainPath=/opt/deephaven/config/dev-certs/server.chain.crt
+ssl.identity.privateKeyPath=/opt/deephaven/config/dev-certs/server.key

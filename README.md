@@ -10,7 +10,7 @@ Clone this repository and run:
 docker compose up -d --build
 ```
 
-Navigate to http://localhost:10000 and open up the `transactions` component.
+Navigate to https://localhost:8443 and open up the `transactions` component. You will likely need to accept the self-signed certificates. Note: these certificates are meant for development purposes only. For more information, see [deephaven-core dev-certs](https://github.com/deephaven/deephaven-core/tree/main/server/dev-certs).
 
 ## TLS
 
