@@ -11,3 +11,7 @@ docker compose up -d --build
 ```
 
 Navigate to http://localhost:10000 and open up the `transactions` component.
+
+## TLS
+
+See the [tls](https://github.com/devinrsmith/deephaven-aws-public-blockchain/tree/tls) branch for a more secure, TLS-based configuration.
