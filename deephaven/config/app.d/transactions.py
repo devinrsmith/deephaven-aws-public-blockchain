@@ -17,6 +17,7 @@ def _int_if(x):
 
 
 # static now, maybe make dynamic w/ listener in future if necessary?
+# Native data iteration from python: https://github.com/deephaven/deephaven-core/issues/5186
 _uris = {date: s3Uri for date, s3Uri in to_numpy(csv.read("/uris.csv"))}
 _s3_instructions = s3.S3Instructions(
     "us-east-2",
@@ -56,10 +57,9 @@ def read_transactions(s3_uri: str) -> Table:
 
 @ui.component
 def transactions_component():
-    # todo: dropdown based on transactions.keys()?
+    # TODO: table for keys
     # https://github.com/deephaven/deephaven-plugins/issues/200
     value, set_value = use_state(next(iter(reversed(_uris.keys()))))
-
     if value not in _uris:
         ret = ui.illustrated_message(
             ui.icon("vsWarning", style={"fontSize": "48px"}),
@@ -70,7 +70,12 @@ def transactions_component():
         s3_uri = _uris[value]
         ret = read_transactions(s3_uri)
     return ui.flex(
-        ui.text_field(value=value, on_change=set_value),
+        ui.picker(
+            *_uris.keys(),
+            label="Date",
+            on_selection_change=set_value,
+            selected_key=value,
+        ),
         ret,
         direction="column",
         flex_grow=1,
