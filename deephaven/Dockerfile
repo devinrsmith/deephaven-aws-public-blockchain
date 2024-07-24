@@ -1,2 +1,2 @@
-FROM ghcr.io/deephaven/server:0.35.1
+FROM ghcr.io/deephaven/server:0.35.2
 COPY config /opt/deephaven/config
